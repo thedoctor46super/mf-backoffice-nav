@@ -1,7 +1,7 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link>
-    <router-link to="/about">About</router-link>
+    <router-link to="/mf-backoffice-root/">Home</router-link>
+    <router-link to="/mf-backoffice-root/about">About</router-link>
     <br /><br />
     <button @click="logout">Logout</button>
   </nav>
@@ -9,23 +9,23 @@
 
 <script>
 import cookie from 'js-cookie';
-import { useRouter } from 'vue-router';
+//import { useRouter } from 'vue-router';
 import { onBeforeMount } from 'vue';
 
 export default {
   name: 'SideNav',
   setup() {
-    const router = useRouter();
+    const router = VueRouter.useRouter();
 
     onBeforeMount(() => {
       if (!cookie.get('ft-portaltoken')) {
-        router.push({ path: '/login' });
+        router.push({ path: '/mf-backoffice-root/login' });
       }
     });
 
     const logout = () => {
       cookie.remove('ft-portaltoken', { path: '/', domain: document.domain });
-      router.push({ path: '/login' });
+      router.push({ path: '/mf-backoffice-root/login' });
     };
 
     return {
